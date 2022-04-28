@@ -1,0 +1,47 @@
+package com.example.demo.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.ReEntity;
+
+@CrossOrigin("*")
+@RestController
+public class ReController {
+
+	@PostMapping("/bfhl")
+	public ResponseEntity<?> bajaj(@RequestBody String str) {		 
+		
+		 
+		    String numArray[];
+	        String alphabetArray[];
+	        StringBuilder numbers = new StringBuilder();
+	        StringBuilder alphabets = new StringBuilder();
+	        String numbersStr = "0123456789";
+	        for (String dataItem : str) {
+	            String item = dataItem.substring(0, 1);
+	            if (numbersStr.contains(item)) {
+	                numbers.append(dataItem);
+	                numbers.append(",");
+	            }
+	            else {
+	                alphabets.append(dataItem);
+	                alphabets.append(",");
+	            }
+	        }
+
+	        numArray = numbers.toString().split(",");
+	        alphabetArray = alphabets.toString().split(",");
+	        ReEntity entity = new ReEntity();
+	        entity.setIs_success(true);
+	        entity.setEmail("john@xyz.com");
+	        entity.setUser_id("john_doe_17091999");
+	        entity.setRoll_number("ABCD123");
+	        entity.setNumbers(numArray);
+	        entity.setAlphabets(alphabetArray);
+	        return ResponseEntity.ok(entity);
+	}
+}
